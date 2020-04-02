@@ -26,7 +26,7 @@ namespace SycomplaWebApp.Controllers
         }
 
         [HttpGet]
-        public string Get([FromQuery(Name = "dummy")] string dummy)
+        public Ac4yServiceResponse Get(DummyClass dummy)
         {
             //return dummy;
 
@@ -37,14 +37,7 @@ namespace SycomplaWebApp.Controllers
                     Dummy = dummy
                 });
 
-            if (dummyResponse.Result.Success())
-            {
-                return ("Minden szuper, dummy string: " + dummy);
-            } 
-            else
-            {
-                return dummyResponse.Result.Message;
-            }
+            return dummyResponse;
             
         }
 
@@ -57,8 +50,9 @@ namespace SycomplaWebApp.Controllers
 
             string dummyTwice = request.Dummy + " " + request.Dummy;
 
-            if (request.Dummy != null)
+            if (request.Dummy.Dummy != null)
             {
+                request.Dummy.ResponseCode = 200;
                 DummySuccessResponse JSONObjSuccess = new DummySuccessResponse();
                 JSONObjSuccess.Dummy = request.Dummy;
 
@@ -69,7 +63,8 @@ namespace SycomplaWebApp.Controllers
             {
 
                 DummyFailedResponse JSONObjFailed = new DummyFailedResponse();
-                JSONObjFailed.StatusCode = 666665;
+                JSONObjFailed.StatusCode = 66666;
+               
 
                 dummyResult.FailedResponse = JSONObjFailed;
                 

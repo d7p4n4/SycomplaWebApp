@@ -19,7 +19,7 @@ namespace SycomplaWebApp
 
         public static IWebHostBuilder CreateHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .UseUrls("https://89.46.75.137:8003")
+                .UseUrls("http://89.46.75.137:8003")
                 .UseKestrel()
                 .UseStartup<Startup>();
     }/*

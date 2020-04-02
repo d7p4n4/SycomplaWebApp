@@ -8,7 +8,7 @@ namespace SycomplaWebApp
 {
     public class DummySuccessResponse
     {
-        [JsonProperty("Dummy")]
-        public string Dummy { get; set; }
+        [JsonProperty("dummy")]
+        public DummyClass Dummy { get; set; }
     }
 }

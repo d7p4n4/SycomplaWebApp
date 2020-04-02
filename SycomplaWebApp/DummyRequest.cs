@@ -8,6 +8,6 @@ namespace SycomplaWebApp
 {
     public class DummyRequest : Ac4yServiceRequest
     {
-        public string Dummy { get; set; }
+        public DummyClass Dummy { get; set; }
     }
 }
