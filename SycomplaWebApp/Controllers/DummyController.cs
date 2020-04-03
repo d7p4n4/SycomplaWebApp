@@ -57,6 +57,14 @@ namespace SycomplaWebApp.Controllers
 
         }
 
+        [HttpPost]
+        [Route("FireBaseNotificationSend")]
+        public Ac4yServiceResponse FireBaseNotificationSend(FireBaseRequest request)
+        {
+            return new FireBaseMethods().SendNotification(request);
+        }
+
+
 
     }
 }
