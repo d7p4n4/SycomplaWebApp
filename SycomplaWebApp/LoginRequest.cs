@@ -5,11 +5,8 @@ using System.Threading.Tasks;
 
 namespace SycomplaWebApp
 {
-    public class DummyClass
+    public class LoginRequest
     {
-        public string Dummy { get; set; }
-        public int ResponseCode { get; set; }
-
-
+        public string Token { get; set; }
     }
 }

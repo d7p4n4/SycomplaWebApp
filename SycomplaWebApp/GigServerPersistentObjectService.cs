@@ -1,0 +1,86 @@
+﻿using Modul.Final.Class;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace SycomplaWebApp
+{
+    public class GigServerPersistentObjectService
+    {
+        public InsertResponse Insert(InsertRequest request)
+        {
+            InsertResponse response = new InsertResponse();
+
+            try
+            {
+                response.User = new EFMethodsCAP().Insert(request.User);
+
+                response.Result = new Ac4yProcessResult() { Code = Ac4yProcessResult.SUCCESS };
+            }
+            catch (Exception exception)
+            {
+                response.Result = (new Ac4yProcessResult() { Code = Ac4yProcessResult.FAIL, Message = exception.Message, Description = exception.StackTrace });
+            }
+            return response;
+
+        }
+
+        public IsExistByFBTokenResponse isExistByFBToken(IsExistByFBTokenRequest request)
+        {
+            IsExistByFBTokenResponse response = new IsExistByFBTokenResponse();
+
+            try { 
+                if (new EFMethodsCAP().IsExistByFBToken(request.FBToken))
+                    response.Result = new Ac4yProcessResult() { Code = Ac4yProcessResult.SUCCESS, Message = "létezik" };
+                else
+                    response.Result = new Ac4yProcessResult() { Code = Ac4yProcessResult.INEFFECTIVE, Message = "nem létezik" };
+            }
+            catch (Exception exception)
+            {
+                response.Result = (new Ac4yProcessResult() { Code = Ac4yProcessResult.FAIL, Message = exception.Message, Description = exception.StackTrace });
+            }
+            return response;
+        }
+
+        public GetByFBTokenResponse GetByFBToken(GetByFBTokenRequest request)
+        {
+            GetByFBTokenResponse response = new GetByFBTokenResponse();
+
+            try
+            {
+                response.User = new EFMethodsCAP().GetByFBToken(request.FBToken);
+
+                response.Result = new Ac4yProcessResult() { Code = Ac4yProcessResult.SUCCESS };
+            }
+            catch (Exception exception)
+            {
+                response.Result = (new Ac4yProcessResult() { Code = Ac4yProcessResult.FAIL, Message = exception.Message, Description = exception.StackTrace });
+            }
+            return response;
+        }
+
+        public IsUnknownOrInvalidTokenResponse IsUnknownOrInvalidToken(IsUnknownOrInvalidTokenRequest request)
+        {
+            IsUnknownOrInvalidTokenResponse response = new IsUnknownOrInvalidTokenResponse();
+
+            try
+            {
+                if (new GigServerService().IsUnknownOrInvalidToken(request.FBToken))
+                    response.Result = new Ac4yProcessResult() { Code = Ac4yProcessResult.SUCCESS, Message = "létezik" };
+                else
+                    response.Result = new Ac4yProcessResult() { Code = Ac4yProcessResult.INEFFECTIVE, Message = "nem létezik" };
+            }
+            catch (Exception exception)
+            {
+                response.Result = (new Ac4yProcessResult() { Code = Ac4yProcessResult.FAIL, Message = exception.Message, Description = exception.StackTrace });
+            }
+            return response;
+        }
+        /*
+        public LoginRequestResponse LoginRequest(LoginRequestRequest request)
+        {
+
+        }*/
+    }
+}

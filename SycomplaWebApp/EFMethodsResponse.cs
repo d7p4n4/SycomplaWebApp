@@ -5,11 +5,9 @@ using System.Threading.Tasks;
 
 namespace SycomplaWebApp
 {
-    public class DummyClass
+    public class EFMethodsResponse
     {
-        public string Dummy { get; set; }
-        public int ResponseCode { get; set; }
-
-
+        public string Status { get; set; }
+        public string Message { get; set; }
     }
 }
