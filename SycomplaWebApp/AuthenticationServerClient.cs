@@ -26,7 +26,7 @@ namespace SycomplaWebApp
             AuthenticatioRequestResponse response = new AuthenticatioRequestResponse();
 
             try{
-                new Ac4yRestServiceClient(Server, ServerKey).POST("", "{\r\n \"to\" : \"" + request.FBToken + "\",\r\n\r\n \"data\" : {\r\n\r\n } \r\n}");
+                new Ac4yRestServiceClient(Server, ServerKey).POST("", "{\r\n \"to\" : \"" + request.fbToken + "\",\r\n\r\n \"data\" : {\r\n\r\n } \r\n}");
 
                 response.Result = new Ac4yProcessResult() { Code = Ac4yProcessResult.SUCCESS };
             }

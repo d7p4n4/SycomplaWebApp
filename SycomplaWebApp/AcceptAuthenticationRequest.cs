@@ -7,6 +7,6 @@ namespace SycomplaWebApp.Controllers
 {
     public class AcceptAuthenticationRequest
     {
-        public string Token { get; set; }
+        public string fbToken { get; set; }
     }
 }

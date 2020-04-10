@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Page Title</title>
+</head>
+<body>
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/7.13.2/firebase.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.13.2/firebase-database.js"></script>
+
+<script>
+    class Ac4yRestServiceClient {
+        constructor(host){this.host=host;}
+        getHost(){return this.host;};
+        jsonContent(){return new Headers({'Content-Type': 'application/json'});}
+        async get(path) {
+            const promise = await fetch(this.getHost()+path);
+            return await promise.json();
+        }
+        async post(path, request) {
+            const promise = await fetch(
+                this.getHost()+path
+                ,{
+                    method: 'POST'
+                    ,body: JSON.stringify(request)
+                    ,headers: this.jsonContent()
+                }
+            );
+            return await promise.json();
+        } // post
+    } // Ac4yRestServiceClient
+
+    class RestServiceClient extends Ac4yRestServiceClient {
+        async firebaseSignUp(request) {return await this.post("/gigserver/signup", request)};
+    }; // GateRestServiceClient
+
+    var gigRestServiceClient = new RestServiceClient( "https://service.sycompla.hu");
+
+    async function fbSignUp(fbToken){
+        var response = await gigRestServiceClient.firebaseSignUp({fbToken: fbToken});
+        console.log(response);
+    }
+
+
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyCHxM0wUG13SqWO1-3sz6qH55klT9o63U4",
+    authDomain: "onlyhttp-efac3.firebaseapp.com",
+    databaseURL: "https://onlyhttp-efac3.firebaseio.com",
+    projectId: "onlyhttp-efac3",
+    storageBucket: "onlyhttp-efac3.appspot.com",
+    messagingSenderId: "217834076564",
+    appId: "1:217834076564:web:87be1f703dd42075ccf781",
+    measurementId: "G-E5Z8M1PNK2"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+
+  const messaging = firebase.messaging();
+
+    messaging.usePublicVapidKey('BBZyemd-Hluk0hCFA4xhI3rIcgnWtn_f6dikJ7GE_99SaH65znVAuvhYgge9rWlgUUNw3wTHZpONuInl46axtEU');
+
+    function signUp() {
+        // [START get_token]
+        // Get Instance ID token. Initially this makes a network call, once retrieved
+        // subsequent calls to getToken will return from cache.
+        messaging.getToken().then((currentToken) => {
+        if (currentToken) {
+            console.log(currentToken);
+            fbSignUp(currentToken);
+            //postDummyString(currentToken);
+        } else {
+            // Show permission request.
+            console.log('No Instance ID token available. Request permission to generate one.');
+            // Show permission UI.
+        }
+        }).catch((err) => {
+        console.log('An error occurred while retrieving token. ', err);
+
+        });
+        // [END get_token
+    }   
+
+    function requestPermission() {
+        console.log('Requesting permission...');
+        // [START request_permission]
+        Notification.requestPermission().then((permission) => {
+        if (permission === 'granted') {
+            console.log('Notification permission granted.');
+            // TODO(developer): Retrieve an Instance ID token for use with FCM.
+            // [START_EXCLUDE]
+            // In many cases once an app has been granted notification permission,
+            // it should update its UI reflecting this.
+            // [END_EXCLUDE]
+        } else {
+            console.log('Unable to get permission to notify.');
+        }
+        });
+        // [END request_permission]
+    }
+
+    requestPermission
+
+  
+</script>
+
+<button onclick="signUp()">Sign Up</button>
+<br><br>
+
+</body>
+</html>
+
+

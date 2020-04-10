@@ -1,13 +1,12 @@
-﻿using System;
+﻿using Modul.Final.Class;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace SycomplaWebApp
 {
-    public class LoginResponse
+    public class FirebaseSignUpResponse : Ac4yServiceResponse
     {
-        public string fbToken { get; set; }
-        
     }
 }

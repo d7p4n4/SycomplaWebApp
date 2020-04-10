@@ -8,6 +8,6 @@ namespace SycomplaWebApp
 {
     public class IsExistByFBTokenRequest : Ac4yServiceRequest
     {
-        public string FBToken { get; set; }
+        public string fbToken { get; set; }
     }
 }

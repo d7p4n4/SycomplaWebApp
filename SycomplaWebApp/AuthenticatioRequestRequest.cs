@@ -8,7 +8,7 @@ namespace SycomplaWebApp
 {
     public class AuthenticatioRequestRequest : Ac4yServiceRequest
     {
-        public string FBToken { get; set; }
+        public string fbToken { get; set; }
 
     }
 }

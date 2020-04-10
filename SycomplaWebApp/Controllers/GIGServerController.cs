@@ -16,7 +16,7 @@ namespace SycomplaWebApp.Controllers
         [Route("loginRequestDepecrated")]
         public LoginResponse LoginRequest(LoginRequest request)
         {
-            return new LoginResponse() { Token = request.Token };
+            return new LoginResponse() { fbToken = request.fbToken };
         }
 
         [HttpGet]
@@ -31,7 +31,7 @@ namespace SycomplaWebApp.Controllers
         [Route("acceptAuthentication")]
         public AcceptAuthenticationResponse AcceptAuthentication(AcceptAuthenticationRequest request)
         {
-            return new AcceptAuthenticationResponse() { Token = request.Token };
+            return new AcceptAuthenticationResponse() { fbToken = request.fbToken };
         }
 
         [HttpPost]
@@ -65,6 +65,13 @@ namespace SycomplaWebApp.Controllers
         {
 
             return new AuthenticationServerClient("https://fcm.googleapis.com/fcm/send", "AAAAMrfsOZQ:APA91bE_BRElbjcU7XZyAZn6Yw8C8bhOS1vd3gWGch9am14IepEIJleW_ZKGACIyGzz3gxuQpLwVUcZuZcsRWg7k0UbnJ3_SWL87tCT41I6ALga7lnANK-WlhV94mOn5b08mIVaVv1Dx").AuthenticatioRequest(request);
+        }
+
+        [HttpPost]
+        [Route("signup")]
+        public FirebaseSignUpResponse SignUp(FirebaseSignUpRequest request)
+        {
+            return new FirebaseSignUpServerClient().FirebaseSignUp(new FirebaseSignUpRequest() { fbToken = request.fbToken });
         }
 
     }

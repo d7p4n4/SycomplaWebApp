@@ -31,7 +31,7 @@ namespace SycomplaWebApp
             IsExistByFBTokenResponse response = new IsExistByFBTokenResponse();
 
             try { 
-                if (new EFMethodsCAP().IsExistByFBToken(request.FBToken))
+                if (new EFMethodsCAP().IsExistByFBToken(request.fbToken))
                     response.Result = new Ac4yProcessResult() { Code = Ac4yProcessResult.SUCCESS, Message = "létezik" };
                 else
                     response.Result = new Ac4yProcessResult() { Code = Ac4yProcessResult.INEFFECTIVE, Message = "nem létezik" };
@@ -49,7 +49,7 @@ namespace SycomplaWebApp
 
             try
             {
-                response.User = new EFMethodsCAP().GetByFBToken(request.FBToken);
+                response.User = new EFMethodsCAP().GetByFBToken(request.fbToken);
 
                 response.Result = new Ac4yProcessResult() { Code = Ac4yProcessResult.SUCCESS };
             }
@@ -136,7 +136,7 @@ namespace SycomplaWebApp
 
             try
             {
-                if (new GigServerService().IsUnknownOrInvalidToken(request.FBToken))
+                if (new GigServerService().IsUnknownOrInvalidToken(request.fbToken))
                     response.Result = new Ac4yProcessResult() { Code = Ac4yProcessResult.SUCCESS, Message = "létezik" };
                 else
                     response.Result = new Ac4yProcessResult() { Code = Ac4yProcessResult.INEFFECTIVE, Message = "nem létezik" };
@@ -154,7 +154,7 @@ namespace SycomplaWebApp
 
             try
             {
-                if (new GigServerService().LoginRequest(request.FBToken))
+                if (new GigServerService().LoginRequest(request.fbToken))
                 {
                     response.Result = new Ac4yProcessResult() { Code = Ac4yProcessResult.SUCCESS, Message = "Mehet a login, a token rendben" };
 
@@ -164,7 +164,7 @@ namespace SycomplaWebApp
                         {
                             Server = "https://fcm.googleapis.com/fcm/send",
                             ServerKey = "AAAAMrfsOZQ:APA91bE_BRElbjcU7XZyAZn6Yw8C8bhOS1vd3gWGch9am14IepEIJleW_ZKGACIyGzz3gxuQpLwVUcZuZcsRWg7k0UbnJ3_SWL87tCT41I6ALga7lnANK-WlhV94mOn5b08mIVaVv1Dx"
-                        }.AuthenticatioRequest(new AuthenticatioRequestRequest() { FBToken = request.FBToken });
+                        }.AuthenticatioRequest(new AuthenticatioRequestRequest() { fbToken = request.fbToken });
 
                         response.Result = new Ac4yProcessResult() { Code = Ac4yProcessResult.SUCCESS, Message = "Authentikáció sikeres" };
 
