@@ -77,14 +77,14 @@ namespace SycomplaWebApp
             }
             return response;
         }
-
-        public GetByFBTokenResponse GetByFBToken(GetByFBTokenRequest request)
+        
+        public GetByIdResponse GetById(GetByIdRequest request)
         {
-            GetByFBTokenResponse response = new GetByFBTokenResponse();
+            GetByIdResponse response = new GetByIdResponse();
 
             try
             {
-                response.User = new EFMethodsCAP().GetByFBToken(request.FBToken);
+                response.User = new EFMethodsCAP().GetByFBToken(request.id);
 
                 response.Result = new Ac4yProcessResult() { Code = Ac4yProcessResult.SUCCESS };
             }
@@ -94,7 +94,7 @@ namespace SycomplaWebApp
             }
             return response;
         }
-
+        
         public isExistByGuidResponse isExistByGuid(isExistByGuidRequest request)
         {
             isExistByGuidResponse response = new isExistByGuidResponse();
