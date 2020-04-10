@@ -60,6 +60,76 @@ namespace SycomplaWebApp
             return response;
         }
 
+        public isExistByIdResponse isExistById(isExistByIdRequest request)
+        {
+            isExistByIdResponse response = new isExistByIdResponse();
+
+            try
+            {
+                if (new EFMethodsCAP().IsExistById(request.id))
+                    response.Result = new Ac4yProcessResult() { Code = Ac4yProcessResult.SUCCESS, Message = "létezik" };
+                else
+                    response.Result = new Ac4yProcessResult() { Code = Ac4yProcessResult.INEFFECTIVE, Message = "nem létezik" };
+            }
+            catch (Exception exception)
+            {
+                response.Result = (new Ac4yProcessResult() { Code = Ac4yProcessResult.FAIL, Message = exception.Message, Description = exception.StackTrace });
+            }
+            return response;
+        }
+
+        public GetByFBTokenResponse GetByFBToken(GetByFBTokenRequest request)
+        {
+            GetByFBTokenResponse response = new GetByFBTokenResponse();
+
+            try
+            {
+                response.User = new EFMethodsCAP().GetByFBToken(request.FBToken);
+
+                response.Result = new Ac4yProcessResult() { Code = Ac4yProcessResult.SUCCESS };
+            }
+            catch (Exception exception)
+            {
+                response.Result = (new Ac4yProcessResult() { Code = Ac4yProcessResult.FAIL, Message = exception.Message, Description = exception.StackTrace });
+            }
+            return response;
+        }
+
+        public isExistByGuidResponse isExistByGuid(isExistByGuidRequest request)
+        {
+            isExistByGuidResponse response = new isExistByGuidResponse();
+
+            try
+            {
+                if (new EFMethodsCAP().IsExistByGuid(request.Guid))
+                    response.Result = new Ac4yProcessResult() { Code = Ac4yProcessResult.SUCCESS, Message = "létezik" };
+                else
+                    response.Result = new Ac4yProcessResult() { Code = Ac4yProcessResult.INEFFECTIVE, Message = "nem létezik" };
+            }
+            catch (Exception exception)
+            {
+                response.Result = (new Ac4yProcessResult() { Code = Ac4yProcessResult.FAIL, Message = exception.Message, Description = exception.StackTrace });
+            }
+            return response;
+        }
+
+        public GetByGuidResponse GetByGuid(GetByGuidRequest request)
+        {
+            GetByGuidResponse response = new GetByGuidResponse();
+
+            try
+            {
+                response.User = new EFMethodsCAP().GetByGuid(request.Guid);
+
+                response.Result = new Ac4yProcessResult() { Code = Ac4yProcessResult.SUCCESS };
+            }
+            catch (Exception exception)
+            {
+                response.Result = (new Ac4yProcessResult() { Code = Ac4yProcessResult.FAIL, Message = exception.Message, Description = exception.StackTrace });
+            }
+            return response;
+        }
+
         public IsUnknownOrInvalidTokenResponse IsUnknownOrInvalidToken(IsUnknownOrInvalidTokenRequest request)
         {
             IsUnknownOrInvalidTokenResponse response = new IsUnknownOrInvalidTokenResponse();
