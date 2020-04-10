@@ -17,6 +17,9 @@
     <Reference Include="CSAc4yFW">
       <HintPath>C:\library\LPCsharp\CSAc4yFW.dll</HintPath>
     </Reference>
+    <Reference Include="CSAc4yRestServiceClientFW">
+      <HintPath>C:\library\LPCsharp\CSAc4yRestServiceClientFW.dll</HintPath>
+    </Reference>
     <Reference Include="CSAc4yServiceFW">
       <HintPath>C:\library\LPCsharp\CSAc4yServiceFW.dll</HintPath>
     </Reference>

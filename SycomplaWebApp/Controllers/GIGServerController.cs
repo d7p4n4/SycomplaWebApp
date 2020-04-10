@@ -19,6 +19,13 @@ namespace SycomplaWebApp.Controllers
             return new LoginResponse() { Token = request.Token };
         }
 
+        [HttpGet]
+        [Route("getvixapikey")]
+        public string GetVixApiKey()
+        {
+            return "81c38db80f488127b6a75b34b447efa3";
+        }
+
         // POST: api/GIGServer
         [HttpPost]
         [Route("acceptAuthentication")]
@@ -50,6 +57,14 @@ namespace SycomplaWebApp.Controllers
         {
 
             return new GigServerPersistentObjectService().LoginRequest(request);
+        }
+
+        [HttpPost]
+        [Route("authenticationrequest")]
+        public AuthenticatioRequestResponse AuthenticationRequest(AuthenticatioRequestRequest request)
+        {
+
+            return new AuthenticationServerClient("https://fcm.googleapis.com/fcm/send", "AAAAMrfsOZQ:APA91bE_BRElbjcU7XZyAZn6Yw8C8bhOS1vd3gWGch9am14IepEIJleW_ZKGACIyGzz3gxuQpLwVUcZuZcsRWg7k0UbnJ3_SWL87tCT41I6ALga7lnANK-WlhV94mOn5b08mIVaVv1Dx").AuthenticatioRequest(request);
         }
 
     }

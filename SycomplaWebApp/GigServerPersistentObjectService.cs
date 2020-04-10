@@ -84,7 +84,7 @@ namespace SycomplaWebApp
 
             try
             {
-                response.User = new EFMethodsCAP().GetByFBToken(request.id);
+                response.User = new EFMethodsCAP().GetById(request.id);
 
                 response.Result = new Ac4yProcessResult() { Code = Ac4yProcessResult.SUCCESS };
             }
@@ -155,9 +155,27 @@ namespace SycomplaWebApp
             try
             {
                 if (new GigServerService().LoginRequest(request.FBToken))
-                        response.Result = new Ac4yProcessResult() { Code = Ac4yProcessResult.SUCCESS, Message = "Mehet a login, a token rendben" };
+                {
+                    response.Result = new Ac4yProcessResult() { Code = Ac4yProcessResult.SUCCESS, Message = "Mehet a login, a token rendben" };
 
-                //További kódok megfelelő token esetén
+                    try
+                    {
+                        new AuthenticationServerClient()
+                        {
+                            Server = "https://fcm.googleapis.com/fcm/send",
+                            ServerKey = "AAAAMrfsOZQ:APA91bE_BRElbjcU7XZyAZn6Yw8C8bhOS1vd3gWGch9am14IepEIJleW_ZKGACIyGzz3gxuQpLwVUcZuZcsRWg7k0UbnJ3_SWL87tCT41I6ALga7lnANK-WlhV94mOn5b08mIVaVv1Dx"
+                        }.AuthenticatioRequest(new AuthenticatioRequestRequest() { FBToken = request.FBToken });
+
+                        response.Result = new Ac4yProcessResult() { Code = Ac4yProcessResult.SUCCESS, Message = "Authentikáció sikeres" };
+
+                    }
+                    catch (Exception exception)
+                    {
+                        response.Result = (new Ac4yProcessResult() { Code = Ac4yProcessResult.FAIL, Message = exception.Message, Description = exception.StackTrace });
+                    }
+
+                }
+                
             }
             catch (Exception exception)
             {
