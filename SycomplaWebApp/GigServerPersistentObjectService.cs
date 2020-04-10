@@ -77,10 +77,24 @@ namespace SycomplaWebApp
             }
             return response;
         }
-        /*
+        
         public LoginRequestResponse LoginRequest(LoginRequestRequest request)
         {
+            LoginRequestResponse response = new LoginRequestResponse();
 
-        }*/
+            try
+            {
+                if (new GigServerService().LoginRequest(request.FBToken))
+                        response.Result = new Ac4yProcessResult() { Code = Ac4yProcessResult.SUCCESS, Message = "Mehet a login, a token rendben" };
+
+                //További kódok megfelelő token esetén
+            }
+            catch (Exception exception)
+            {
+                response.Result = (new Ac4yProcessResult() { Code = Ac4yProcessResult.FAIL, Message = exception.Message, Description = exception.StackTrace });
+            }
+            return response;
+        }
+        
     }
 }

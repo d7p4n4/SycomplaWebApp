@@ -13,7 +13,7 @@ namespace SycomplaWebApp.Controllers
     {
         // GET: api/GIGServer
         [HttpPost]
-        [Route("loginRequest")]
+        [Route("loginRequestDepecrated")]
         public LoginResponse LoginRequest(LoginRequest request)
         {
             return new LoginResponse() { Token = request.Token };
@@ -42,6 +42,14 @@ namespace SycomplaWebApp.Controllers
         {
 
             return new GigServerPersistentObjectService().IsUnknownOrInvalidToken(request);
+        }
+
+        [HttpPost]
+        [Route("loginrequest")]
+        public LoginRequestResponse LoginRequest(LoginRequestRequest request)
+        {
+
+            return new GigServerPersistentObjectService().LoginRequest(request);
         }
 
     }

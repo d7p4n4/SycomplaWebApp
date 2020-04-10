@@ -9,7 +9,15 @@ namespace SycomplaWebApp
     {
         public bool IsUnknownOrInvalidToken(string fbToken)
         {
-            return new EFMethodsCAP().IsExistByFBToken(fbToken);
+            return !(new EFMethodsCAP().IsExistByFBToken(fbToken));
+        }
+
+        public bool LoginRequest(string fbToken)
+        {
+            if (IsUnknownOrInvalidToken(fbToken))
+                throw new Exception("Unknown or Invalid Token!");
+
+            return true;
         }
     }
 }
