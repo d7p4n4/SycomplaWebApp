@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SycomplaWebApp
 {
-    public class EFMethodsCAP
+    public class EFUserMethodsCAP
     {
         public User Insert(User user)
         {
@@ -100,5 +100,6 @@ namespace SycomplaWebApp
 
 
     }
+
     }
 }

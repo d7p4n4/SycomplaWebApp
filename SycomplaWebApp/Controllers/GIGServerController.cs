@@ -38,7 +38,7 @@ namespace SycomplaWebApp.Controllers
         [Route("insertuser")]
         public InsertResponse InsertUser(User request)
         {
-            EFMethodsCAP eFMethods = new EFMethodsCAP();
+            EFUserMethodsCAP eFMethods = new EFUserMethodsCAP();
 
             return new GigServerPersistentObjectService().Insert(new InsertRequest() { User = request });
         }

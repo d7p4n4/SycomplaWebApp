@@ -14,10 +14,10 @@ namespace SycomplaWebApp
 
             try
             {
-                if (new EFMethodsCAP().IsExistByFBToken(request.fbToken))
+                if (new EFUserMethodsCAP().IsExistByFBToken(request.fbToken))
                     throw new Exception("Már létezik az adatbázisban ez a token");
 
-                new EFMethodsCAP().Insert(new User() { FBToken = request.fbToken });
+                new EFUserMethodsCAP().Insert(new User() { FBToken = request.fbToken });
 
                 response.Result = new Ac4yProcessResult() { Code = Ac4yProcessResult.SUCCESS };
             }

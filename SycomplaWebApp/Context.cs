@@ -22,5 +22,6 @@ namespace SycomplaWebApp
         }
         
         public DbSet<User> Userek { get; set; }
+        public DbSet<UserToken> Tokenek { get; set; }
     }
 }

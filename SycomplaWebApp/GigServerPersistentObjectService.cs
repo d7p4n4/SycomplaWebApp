@@ -14,7 +14,7 @@ namespace SycomplaWebApp
 
             try
             {
-                response.User = new EFMethodsCAP().Insert(request.User);
+                response.User = new EFUserMethodsCAP().Insert(request.User);
 
                 response.Result = new Ac4yProcessResult() { Code = Ac4yProcessResult.SUCCESS };
             }
@@ -31,7 +31,7 @@ namespace SycomplaWebApp
             IsExistByFBTokenResponse response = new IsExistByFBTokenResponse();
 
             try { 
-                if (new EFMethodsCAP().IsExistByFBToken(request.fbToken))
+                if (new EFUserMethodsCAP().IsExistByFBToken(request.fbToken))
                     response.Result = new Ac4yProcessResult() { Code = Ac4yProcessResult.SUCCESS, Message = "létezik" };
                 else
                     response.Result = new Ac4yProcessResult() { Code = Ac4yProcessResult.INEFFECTIVE, Message = "nem létezik" };
@@ -49,7 +49,7 @@ namespace SycomplaWebApp
 
             try
             {
-                response.User = new EFMethodsCAP().GetByFBToken(request.fbToken);
+                response.User = new EFUserMethodsCAP().GetByFBToken(request.fbToken);
 
                 response.Result = new Ac4yProcessResult() { Code = Ac4yProcessResult.SUCCESS };
             }
@@ -66,7 +66,7 @@ namespace SycomplaWebApp
 
             try
             {
-                if (new EFMethodsCAP().IsExistById(request.id))
+                if (new EFUserMethodsCAP().IsExistById(request.id))
                     response.Result = new Ac4yProcessResult() { Code = Ac4yProcessResult.SUCCESS, Message = "létezik" };
                 else
                     response.Result = new Ac4yProcessResult() { Code = Ac4yProcessResult.INEFFECTIVE, Message = "nem létezik" };
@@ -84,7 +84,7 @@ namespace SycomplaWebApp
 
             try
             {
-                response.User = new EFMethodsCAP().GetById(request.id);
+                response.User = new EFUserMethodsCAP().GetById(request.id);
 
                 response.Result = new Ac4yProcessResult() { Code = Ac4yProcessResult.SUCCESS };
             }
@@ -101,7 +101,7 @@ namespace SycomplaWebApp
 
             try
             {
-                if (new EFMethodsCAP().IsExistByGuid(request.Guid))
+                if (new EFUserMethodsCAP().IsExistByGuid(request.Guid))
                     response.Result = new Ac4yProcessResult() { Code = Ac4yProcessResult.SUCCESS, Message = "létezik" };
                 else
                     response.Result = new Ac4yProcessResult() { Code = Ac4yProcessResult.INEFFECTIVE, Message = "nem létezik" };
@@ -119,7 +119,7 @@ namespace SycomplaWebApp
 
             try
             {
-                response.User = new EFMethodsCAP().GetByGuid(request.Guid);
+                response.User = new EFUserMethodsCAP().GetByGuid(request.Guid);
 
                 response.Result = new Ac4yProcessResult() { Code = Ac4yProcessResult.SUCCESS };
             }
@@ -183,6 +183,38 @@ namespace SycomplaWebApp
             }
             return response;
         }
-        
+
+        public GetUserFromByTokenResponse GetUserFromByToken(GetUserFromByTokenReqest request)
+        {
+            GetUserFromByTokenResponse response = new GetUserFromByTokenResponse();
+
+            try
+            {
+                GetUserGuidByFBTokenResponse getUserGuidByFBTokenResponse =
+                    new UserServerObjectService().GetUserGuidByToken(new GetUserGuidByFBTokenRequest()
+                    {
+                        fbToken = request.fbToken
+                    });
+
+                if (getUserGuidByFBTokenResponse.Result.Success())
+                {
+                    response.UserGuid = getUserGuidByFBTokenResponse.UserGuid;
+                    response.Result = new Ac4yProcessResult() { Code = Ac4yProcessResult.SUCCESS, Message = "létezik" };
+                }
+                else
+                {
+                    response.Result = new Ac4yProcessResult() { Code = Ac4yProcessResult.INEFFECTIVE, Message = "nem létezik" };
+                }
+
+            }
+            catch (Exception exception)
+            {
+                response.Result = (new Ac4yProcessResult() { Code = Ac4yProcessResult.FAIL, Message = exception.Message, Description = exception.StackTrace });
+            }
+            return response;
+        }
+
     }
+
 }
+
