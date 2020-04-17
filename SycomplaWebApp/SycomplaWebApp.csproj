@@ -23,6 +23,12 @@
     <Reference Include="CSAc4yServiceFW">
       <HintPath>C:\library\LPCsharp\CSAc4yServiceFW.dll</HintPath>
     </Reference>
+    <Reference Include="CSGIGServer">
+      <HintPath>C:\library\LPCsharp\CSGIGServer.dll</HintPath>
+    </Reference>
+    <Reference Include="CSGIGUserServer">
+      <HintPath>C:\library\LPCsharp\CSGIGUserServer.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 
