@@ -87,7 +87,10 @@ namespace SycomplaWebApp.Controllers
         [Route("checkserialnumber")]
         public CheckSerialNumberObjectResponse CheckSerialNumber(CheckSerialNumberObjectRequest request)
         {
-            return new GigServerPersistentObjectService().CheckSerialNumber(new CheckSerialNumberObjectRequest() { SerialNumber = request.SerialNumber });
+            return new GigServerPersistentObjectService().CheckSerialNumber(new CheckSerialNumberObjectRequest() { 
+                SerialNumber = request.SerialNumber,
+                fbToken = request.fbToken
+            });
         }
 
         [HttpPost]

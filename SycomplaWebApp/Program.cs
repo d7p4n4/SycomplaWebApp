@@ -9,7 +9,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
 namespace SycomplaWebApp
-{
+{/*
     public class Program
     { 
         public static void Main(string[] args)
@@ -22,7 +22,7 @@ namespace SycomplaWebApp
                 .UseUrls("http://89.46.75.137:8003")
                 .UseKestrel()
                 .UseStartup<Startup>();
-    }/*
+    }/*/
 
         public class Program
         {
@@ -38,5 +38,5 @@ namespace SycomplaWebApp
                         webBuilder.UseStartup<Startup>();
                     });
         
-    }*/
+    }
 }
