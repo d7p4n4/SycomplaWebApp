@@ -76,5 +76,33 @@ namespace SycomplaWebApp.Controllers
             return new FirebaseSignUpServerClient().FirebaseSignUp(new FirebaseSignUpRequest() { fbToken = request.fbToken });
         }
 
+        [HttpPost]
+        [Route("getuserfrombytoken")]
+        public GetUserFromByTokenResponse GetUserFromByToken(GetUserFromByTokenReqest request)
+        {
+            return new GigServerPersistentObjectService().GetUserFromByToken(new GetUserFromByTokenReqest() { fbToken = request.fbToken });
+        }
+
+        [HttpPost]
+        [Route("checkserialnumber")]
+        public CheckSerialNumberObjectResponse CheckSerialNumber(CheckSerialNumberObjectRequest request)
+        {
+            return new GigServerPersistentObjectService().CheckSerialNumber(new CheckSerialNumberObjectRequest() { SerialNumber = request.SerialNumber });
+        }
+
+        [HttpPost]
+        [Route("acceptrequest")]
+        public AcceptRequestResponse AcceptRequest(AcceptRequestRequest request)
+        {
+            return new GigServerPersistentObjectService().AcceptRequest(new AcceptRequestRequest() { UserToken = request.UserToken });
+        }
+
+        [HttpPost]
+        [Route("attachnewdevice")]
+        public AttachNewDeviceObjectResponse AttachNewDevice(AttachNewDeviceObjectRequest request)
+        {
+            return new GigServerPersistentObjectService().AttachNewDevice(new AttachNewDeviceObjectRequest() { UserToken = request.UserToken });
+        }
+
     }
 }
