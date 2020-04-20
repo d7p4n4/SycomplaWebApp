@@ -29,12 +29,6 @@ namespace SycomplaWebApp.Controllers
         }
 
         // POST: api/GIGServer
-        [HttpPost]
-        [Route("acceptAuthentication")]
-        public AcceptAuthenticationResponse AcceptAuthentication(AcceptAuthenticationRequest request)
-        {
-            return new AcceptAuthenticationResponse() { fbToken = request.fbToken };
-        }
 
         [HttpPost]
         [Route("insertuser")]
@@ -105,6 +99,17 @@ namespace SycomplaWebApp.Controllers
         public AttachNewDeviceObjectResponse AttachNewDevice(AttachNewDeviceObjectRequest request)
         {
             return new GigServerPersistentObjectService().AttachNewDevice(new AttachNewDeviceObjectRequest() { UserToken = request.UserToken });
+        }
+
+        [HttpPost]
+        [Route("acceptauthentication")]
+        public AcceptAuthenticationResponse AttachNewDevice(AcceptAuthenticationRequest request)
+        {
+            return new GigServerPersistentObjectService().AcceptAuthentication(new AcceptAuthenticationRequest()
+                {
+                    RequestGuid = request.RequestGuid,
+                    CheckData = request.CheckData
+                });
         }
 
     }
