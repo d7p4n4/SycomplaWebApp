@@ -63,7 +63,7 @@ namespace SycomplaWebApp.Controllers
 
         [HttpPost]
         [Route("authenticationrequest")]
-        public AuthenticatioRequestResponse AuthenticationRequest(AuthenticatioRequestRequest request)
+        public AuthenticationRequestClientResponse AuthenticationRequest(AuthenticationRequestClientRequest request)
         {
 
             return new AuthenticationServerClient("https://fcm.googleapis.com/fcm/send", "AAAAMrfsOZQ:APA91bE_BRElbjcU7XZyAZn6Yw8C8bhOS1vd3gWGch9am14IepEIJleW_ZKGACIyGzz3gxuQpLwVUcZuZcsRWg7k0UbnJ3_SWL87tCT41I6ALga7lnANK-WlhV94mOn5b08mIVaVv1Dx").AuthenticatioRequest(request);
