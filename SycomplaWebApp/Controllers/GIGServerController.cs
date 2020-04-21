@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CSGIGAuthenticationServer;
 using CSGIGServer;
 using CSGIGUserServer;
 using Microsoft.AspNetCore.Http;
@@ -57,21 +58,21 @@ namespace SycomplaWebApp.Controllers
 
         [HttpPost]
         [Route("authenticationrequest")]
-        public AuthenticationRequestObjectServiceResponse AuthenticationRequest(AuthenticationRequestObjectServiceRequest request)
+        public AuthenticationRequestResponse AuthenticationRequest(AuthenticationRequestRequest request)
         {
-
-            return new GigServerPersistentObjectService().AuthenticationRequest(new AuthenticationRequestObjectServiceRequest()
+            return new AuthenticationServerObjectService()
             {
-                AuthenticationRequest = request.AuthenticationRequest,
-                fbToken = request.fbToken
-            });
+                Server = "https://fcm.googleapis.com/fcm/send",
+                ServerKey = "AAAAMrfsOZQ:APA91bE_BRElbjcU7XZyAZn6Yw8C8bhOS1vd3gWGch9am14IepEIJleW_ZKGACIyGzz3gxuQpLwVUcZuZcsRWg7k0UbnJ3_SWL87tCT41I6ALga7lnANK-WlhV94mOn5b08mIVaVv1Dx"
+            }.AuthenticationRequest(new AuthenticationRequestRequest() { fbToken = request.fbToken, CheckData = request.CheckData });
+
         }
 
         [HttpPost]
         [Route("signup")]
-        public FirebaseSignUpResponse SignUp(FirebaseSignUpRequest request)
+        public SignUpRequestResponse SignUp(SignUpRequestRequest request)
         {
-            return new FirebaseSignUpServerClient().FirebaseSignUp(new FirebaseSignUpRequest() { fbToken = request.fbToken });
+            return new GigServerPersistentObjectService().SignUpRequest(new SignUpRequestRequest() { fbToken = request.fbToken });
         }
 
         [HttpPost]
