@@ -57,6 +57,14 @@ namespace SycomplaWebApp.Controllers
         }
 
         [HttpPost]
+        [Route("istokenexist")]
+        public IsTokenExistResponse IsTokenExist(IsTokenExistRequest request)
+        {
+
+            return new GigServerPersistentObjectService().IsTokenExist(request);
+        }
+
+        [HttpPost]
         [Route("authenticationrequest")]
         public AuthenticationRequestResponse AuthenticationRequest(AuthenticationRequestRequest request)
         {
@@ -72,24 +80,14 @@ namespace SycomplaWebApp.Controllers
         [Route("signup")]
         public SignUpRequestResponse SignUp(SignUpRequestRequest request)
         {
-            return new GigServerPersistentObjectService().SignUpRequest(new SignUpRequestRequest() { fbToken = request.fbToken });
+            return new GigServerPersistentObjectService().SignUpRequest(request);
         }
-
-        [HttpPost]
-        [Route("getuserfrombytoken")]
-        public GetUserFromByTokenResponse GetUserFromByToken(GetUserFromByTokenReqest request)
-        {
-            return new GigServerPersistentObjectService().GetUserFromByToken(new GetUserFromByTokenReqest() { fbToken = request.fbToken });
-        }
-
+        
         [HttpPost]
         [Route("checkserialnumber")]
         public CheckSerialNumberObjectResponse CheckSerialNumber(CheckSerialNumberObjectRequest request)
         {
-            return new GigServerPersistentObjectService().CheckSerialNumber(new CheckSerialNumberObjectRequest() { 
-                SerialNumber = request.SerialNumber,
-                fbToken = request.fbToken
-            });
+            return new GigServerPersistentObjectService().CheckSerialNumber(request);
         }
 
         [HttpPost]
