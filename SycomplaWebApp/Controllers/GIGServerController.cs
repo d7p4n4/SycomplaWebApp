@@ -94,7 +94,7 @@ namespace SycomplaWebApp.Controllers
         [Route("acceptrequest")]
         public AcceptRequestResponse AcceptRequest(AcceptRequestRequest request)
         {
-            return new GigServerPersistentObjectService().AcceptRequest(new AcceptRequestRequest() { UserToken = request.UserToken });
+            return new GigServerPersistentObjectService().AcceptRequest(request);
         }
 
         [HttpPost]
