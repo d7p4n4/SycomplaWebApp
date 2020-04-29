@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web.Http.Cors;
 using CSGIGAuthenticationServer;
 using CSGIGServer;
 using CSGIGUserServer;
@@ -12,6 +13,7 @@ namespace SycomplaWebApp.Controllers
 {
     [Route("[controller]")]
     [ApiController]
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class GIGServerController : ControllerBase
     {
         // GET: api/GIGServer
@@ -113,6 +115,21 @@ namespace SycomplaWebApp.Controllers
                     RequestGuid = request.RequestGuid,
                     CheckData = request.CheckData
                 });
+        }
+
+        [HttpPost]
+        [Route("getuserfrombytoken")]
+        public GetUserFromByTokenResponse GetUserFromByToken(GetUserFromByTokenReqest request)
+        {
+            return new GigServerPersistentObjectService().GetUserFromByToken(request);
+        }
+
+
+        [HttpPost]
+        [Route("updateuser")]
+        public UpdateUserByGuidResponse UpdateUser(UpdateUserByGuidRequest request)
+        {
+            return new UserServerObjectService().UpdateUserByGuid(request);
         }
 
     }
