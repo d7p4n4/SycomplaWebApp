@@ -13,7 +13,6 @@ namespace SycomplaWebApp.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class GIGServerController : ControllerBase
     {
         // GET: api/GIGServer
@@ -130,6 +129,13 @@ namespace SycomplaWebApp.Controllers
         public UpdateUserByGuidResponse UpdateUser(UpdateUserByGuidRequest request)
         {
             return new UserServerObjectService().UpdateUserByGuid(request);
+        }
+        
+        [HttpPost]
+        [Route("getlistofusers")]
+        public GetListOfUsersResponse GetListOfUsere(GetListOfUsersRequest request)
+        {
+            return new UserServerObjectService().GetListOfUsers(request);
         }
 
     }

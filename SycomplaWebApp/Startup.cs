@@ -18,6 +18,9 @@ namespace SycomplaWebApp
 {
     public class Startup
     {
+
+        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -28,9 +31,17 @@ namespace SycomplaWebApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddCors();
             services.AddControllers();
 
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: MyAllowSpecificOrigins,
+                                  builder =>
+                                  {
+                                      builder.WithOrigins("*");
+                                  });
+            });
 
         }
 
@@ -46,7 +57,7 @@ namespace SycomplaWebApp
                 app.UseHsts();
             }
 
-            app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+            app.UseCors(MyAllowSpecificOrigins);
 
             app.UseHttpsRedirection();
 
